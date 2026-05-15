@@ -27,21 +27,13 @@
 
   // Mobile sidebar
   const sidebar = document.querySelector('.sidebar');
-  const chatArea = document.querySelector('.chat-area');
+  const mobileTopbar = document.querySelector('.mobile-topbar');
 
-  // Inject menu button and overlay for mobile
-  const menuBtn = document.createElement('button');
-  menuBtn.id = 'menu-btn';
-  menuBtn.title = 'Chats';
-  menuBtn.textContent = '☰';
+  const menuBtn = document.getElementById('menu-btn');
 
   const overlay = document.createElement('div');
   overlay.className = 'sidebar-overlay';
   document.body.appendChild(overlay);
-
-  // Prepend menu button into chat-header (added later when chat opens)
-  // We'll insert it into body initially then move
-  document.body.appendChild(menuBtn);
 
   function openSidebar() {
     sidebar.classList.add('open');
@@ -177,7 +169,7 @@
     emptyState.classList.add('hidden');
     chatView.classList.remove('hidden');
 
-    // Move menu button into header for mobile
+    // Move menu button into chat header for mobile
     const header = document.querySelector('.chat-header');
     if (header && !header.contains(menuBtn)) {
       header.prepend(menuBtn);
@@ -257,6 +249,10 @@
       currentChat = null;
       chatView.classList.add('hidden');
       emptyState.classList.remove('hidden');
+      // Return menu button to the mobile top bar
+      if (mobileTopbar && !mobileTopbar.contains(menuBtn)) {
+        mobileTopbar.prepend(menuBtn);
+      }
     }
   });
 
