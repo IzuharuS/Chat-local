@@ -41,8 +41,8 @@ function loadManifest() {
   }
 }
 
-function saveManifest() {
-  fs.writeFileSync(MANIFEST_FILE, JSON.stringify(manifest, null, 2), 'utf8');
+async function saveManifest() {
+  await fs.promises.writeFile(MANIFEST_FILE, JSON.stringify(manifest, null, 2), 'utf8');
 }
 
 loadManifest();
@@ -96,7 +96,7 @@ app.post('/api/chats', apiLimiter, async (req, res) => {
   const uuid = crypto.randomUUID();
   await fs.promises.writeFile(chatFileById(uuid), '', 'utf8');
   manifest[name] = uuid;
-  saveManifest();
+  await saveManifest();
   io.emit('chat:created', name);
   res.json({ name });
 });
@@ -114,7 +114,7 @@ app.delete('/api/chats/:name', apiLimiter, async (req, res) => {
     // file may already be gone
   }
   delete manifest[name];
-  saveManifest();
+  await saveManifest();
   io.emit('chat:deleted', name);
   res.json({ ok: true });
 });

@@ -36,7 +36,9 @@ Por ejemplo: `http://192.168.1.10:3000`
 
 ## Formato de persistencia
 
-Cada chat se almacena en `chats/<nombre>.txt` con el siguiente formato por línea:
+Cada chat se almacena en `chats/<uuid>.txt` (nombre interno generado automáticamente). El mapeo entre nombre del chat y UUID se guarda en `chats/_manifest.json`.
+
+Formato de cada línea en el archivo de chat:
 
 ```
 [2024-01-15T10:30:00.000Z] Juan: Hola a todos
