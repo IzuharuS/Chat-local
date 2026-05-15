@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat Local</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Identity modal -->
+  <div id="identity-modal" class="modal-overlay">
+    <div class="modal">
+      <h2>Bienvenido</h2>
+      <p>Ingresa tu nombre o deja en blanco para usar tu IP.</p>
+      <input id="identity-input" type="text" placeholder="Tu nombre (opcional)" maxlength="30" />
+      <button id="identity-btn">Entrar</button>
+    </div>
+  </div>
+
+  <div id="app" class="app hidden">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <span class="app-title">Chat Local</span>
+        <span id="user-badge" class="user-badge"></span>
+      </div>
+
+      <div class="sidebar-actions">
+        <input id="new-chat-input" type="text" placeholder="Nombre del chat" maxlength="50" />
+        <button id="create-chat-btn" title="Crear chat">+</button>
+      </div>
+
+      <ul id="chat-list" class="chat-list"></ul>
+    </aside>
+
+    <!-- Main area -->
+    <main class="chat-area">
+      <div class="mobile-topbar">
+        <button id="menu-btn" title="Chats">☰</button>
+        <span class="mobile-topbar-title">Chat Local</span>
+      </div>
+
+      <div id="empty-state" class="empty-state">
+        <p>Selecciona o crea un chat</p>
+      </div>
+
+      <div id="chat-view" class="chat-view hidden">
+        <div class="chat-header">
+          <span id="chat-title" class="chat-title"></span>
+          <button id="delete-chat-btn" class="delete-btn" title="Eliminar chat">🗑</button>
+        </div>
+
+        <div id="messages" class="messages"></div>
+
+        <div class="message-input-area">
+          <input id="message-input" type="text" placeholder="Escribe un mensaje..." />
+          <button id="send-btn">Enviar</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
